@@ -6,23 +6,46 @@ import SingleSelect from './Single Select/SingleSelect';
 import ShortText from './Short Area text/ShortText';
 const { Option } = Select;
 
+const queTypes = ['SingleSelect', 'ShortText']
 export class QuestionTemplate extends Component {
+    constructor(props) {
+        super(props)
+        this.state = {
+            selectedQue: " "
+        }
+    }
+
+    handleChange(val){
+        this.setState({selectedQue:val})
+    }
+
+    displayQueComponent(){
+        switch(this.state.selectedQue){
+            case queTypes[0]:
+                console.log('hi')
+                return <SingleSelect />
+            case queTypes[1]:
+                return  <ShortText />
+            default:
+                return
+        }
+    }
+
     render() {
         return (
             <div className="detail">
                 <div className="questions">
                     <div className="questions__header">
                         <Input className="questions__header-que" placeholder="Question" />
-                        <Select style={{ width: 180 }} placeholder='Select Que Type'>
-                            <Option value="singleSelect"><PlusCircleFilled />&nbsp;Single Select</Option>
-                            <Option value="multiSelect"><PlusCircleFilled /> &nbsp;Multi Select</Option>
-                            <Option value="shortTextArea"><PlusCircleFilled /> &nbsp;Short text area</Option>
-                            <Option value="binary"><PlusCircleFilled /> &nbsp;Binary</Option>
-                            <Option value="datePicker"><PlusCircleFilled /> &nbsp;DatePicker</Option>
+                        <Select onChange={(e)=>this.handleChange(e)} style={{ width: 180 }} placeholder='Select Que Type'>
+                            <Option value="SingleSelect"><PlusCircleFilled />&nbsp;Single Select</Option>
+                            <Option value="MultiSelect"><PlusCircleFilled /> &nbsp;Multi Select</Option>
+                            <Option value="ShortText"><PlusCircleFilled /> &nbsp;Short text area</Option>
+                            <Option value="Binary"><PlusCircleFilled /> &nbsp;Binary</Option>
+                            <Option value="DatePicker"><PlusCircleFilled /> &nbsp;DatePicker</Option>
                         </Select>
                     </div>
-                    {/* <SingleSelect /> */}
-                    <ShortText/>
+                    {this.displayQueComponent()}
                 </div>
                 <div className="variableName">
                     <Input className="variableName__input" placeholder="Variable Name" />
