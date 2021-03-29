@@ -1,0 +1,27 @@
+.short-text{
+    margin: 0 55px;
+}
+.unitsValues{
+    display: flex;
+    margin-top: 3%;
+    /* justify-content: space-evenly; */
+}
+
+.valueValidation{
+    display: flex;
+    flex-direction: column;
+    margin-left: 5%;
+    margin-bottom: 3%;
+
+}
+.valeComparison{
+    margin: 5% 0;
+}
+.number-value{
+    width:20%;
+    max-width: 30%;
+}
+
+.errorText{
+    width: 50%;
+}

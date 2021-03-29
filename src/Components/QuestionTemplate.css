@@ -1,0 +1,36 @@
+.detail{
+    display:flex;
+    border: 0.5px solid #c2bebe;
+    border-radius: 5px;
+}
+
+.questions{
+    flex:  0 0 75%;
+}
+
+.questions__header{
+    display: flex;
+    margin: 20px 25px;
+    justify-content: space-evenly;
+}
+
+.questions__header-que{
+    width: 70%;
+}
+
+.variableName{
+    padding: 20px 25px ;
+    flex:1;
+    background-color: #ddd8d8;
+}
+
+.variableName__input, .variableName__checkbox{
+    margin-bottom: 5%;
+}
+
+.variableName__icons{
+    display: flex;
+    margin-left: 70%;
+    justify-content: space-between;
+    align-items: flex-end;
+}

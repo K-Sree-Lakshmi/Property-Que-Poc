@@ -1,0 +1,28 @@
+.single-select{
+    margin: 0 55px;
+}
+
+.cardname{
+    width: 300px;
+    border: none;
+    border-bottom: 0.5px solid #c2bebe;
+    margin: 20px 0;
+}
+
+.cardType,.cardColor{
+    display: flex;
+    margin-bottom: 20px;
+    justify-content: space-around;
+}
+
+/* .cardType:not(:last-child){
+    margin-left: 15%;
+} */
+
+.cardColor-code{
+    width: 20%;
+}
+
+.responeValidation{
+    margin-bottom: 20px;
+}
