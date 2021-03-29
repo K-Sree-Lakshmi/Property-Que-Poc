@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
-import { Select, Input, message, Upload, Button, Checkbox } from 'antd';
+import { Select, Input,Checkbox } from 'antd';
 import './ShortText.css';
-import '../Single Select/SingleSelect.css';
+// import '../Single Select/SingleSelect.css';
 
 
 const { Option } = Select;
@@ -21,7 +21,7 @@ export class ShortText extends Component {
                     <div>
                         <span>Units</span>
                         <br />
-                        <Input className="cardname" placeholder="unit" />
+                        <Input className="unitInput" placeholder="unit" />
                     </div>
                     <div className="valueValidation">
                         <span>Value</span>

@@ -3,11 +3,14 @@
 }
 
 .cardname{
-    width: 300px;
+    width: 30%;
     border: none;
     border-bottom: 0.5px solid #c2bebe;
     margin: 20px 0;
+    border-radius: 0;
 }
+
+
 
 .cardType,.cardColor{
     display: flex;

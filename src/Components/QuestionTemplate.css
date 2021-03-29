@@ -22,6 +22,7 @@
     padding: 20px 25px ;
     flex:1;
     background-color: #ddd8d8;
+    position: relative;
 }
 
 .variableName__input, .variableName__checkbox{
@@ -29,9 +30,24 @@
 }
 
 .variableName__icons{
+    /* Does not move down with the container */
+    /* align-self: center;
+    display: flex;
+    margin-left: 70%;
+    justify-content: space-between; */
+
+    /* Moves down with the container but flex does not apply */
+    
+    /* position: absolute; */
+
+    /* So use sticky position as it does not affect the flex */
+    position: sticky;
+    top:90%;
+    align-self: center;
     display: flex;
     margin-left: 70%;
     justify-content: space-between;
-    align-items: flex-end;
-    margin-bottom: 5%;
+
+ 
 }
+

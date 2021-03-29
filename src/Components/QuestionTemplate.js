@@ -11,7 +11,7 @@ export class QuestionTemplate extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            selectedQue: " "
+            selectedQue: ""
         }
     }
 
@@ -22,7 +22,7 @@ export class QuestionTemplate extends Component {
     displayQueComponent(){
         switch(this.state.selectedQue){
             case queTypes[0]:
-                console.log('hi')
+                // console.log('hi')
                 return <SingleSelect />
             case queTypes[1]:
                 return  <ShortText />

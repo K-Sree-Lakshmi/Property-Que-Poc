@@ -7,6 +7,14 @@
     /* justify-content: space-evenly; */
 }
 
+.unitInput{
+    width: 100%;
+    border: none;
+    border-bottom: 0.5px solid #c2bebe;
+    margin: 20px 0;
+    border-radius: 0;
+}
+
 .valueValidation{
     display: flex;
     flex-direction: column;
