@@ -40,7 +40,7 @@ export class QuestionTemplate extends Component {
                     <div className="questions__header">
                         <Input className="questions__header-que" placeholder="Question" />
                         <Select onChange={(e)=>this.handleChange(e)} style={{ width: 180 }} placeholder='Select Que Type'>
-                            <Option value="SingleSelect"><PlusCircleFilled />&nbsp;Single Select</Option>
+                            <Option value="SingleSelect"><PlusCircleFilled /> &nbsp;Single Select</Option>
                             <Option value="MultipleSelect"><PlusCircleFilled /> &nbsp;Multiple Select</Option>
                             <Option value="ShortText"><PlusCircleFilled /> &nbsp;Short text area</Option>
                             <Option value="Binary"><PlusCircleFilled /> &nbsp;Binary</Option>
