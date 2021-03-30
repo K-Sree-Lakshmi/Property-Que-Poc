@@ -32,7 +32,7 @@ export class SingleSelect extends Component {
                     <Option value="radioButton">Radio Button</Option>
                 </Select>
                 <br />
-                <Input className="cardname" placeholder="Card 1" />
+                <Input className="cardname" placeholder={this.props.name} />
                 <div className="cardType">
                     <Select style={{ width: 180 }} placeholder='Type'>
                         <Option value="flexibleLength">Flexible Length</Option>
@@ -47,6 +47,7 @@ export class SingleSelect extends Component {
                     </Select>
                 </div>
                 <div className="cardColor">
+                    <span>On Selection</span>
                     <Input className="cardColor-code" placeholder="Card Color" />
                     <Input className="cardColor-code" placeholder="Icon Color" />
                     <Select style={{ width: 190 }} placeholder='Image and Comment'>

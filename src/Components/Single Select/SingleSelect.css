@@ -15,12 +15,11 @@
 .cardType,.cardColor{
     display: flex;
     margin-bottom: 20px;
-    justify-content: space-around;
 }
 
-/* .cardType:not(:last-child){
-    margin-left: 15%;
-} */
+.cardType > *:not(:first-child), .cardColor> *:not(:first-child){
+    margin-left: 5%;
+}
 
 .cardColor-code{
     width: 20%;

@@ -6,7 +6,7 @@ import SingleSelect from './Single Select/SingleSelect';
 import ShortText from './Short Area text/ShortText';
 const { Option } = Select;
 
-const queTypes = ['SingleSelect', 'ShortText']
+const queTypes = ['SingleSelect', 'ShortText','MultipleSelect']
 export class QuestionTemplate extends Component {
     constructor(props) {
         super(props)
@@ -23,9 +23,11 @@ export class QuestionTemplate extends Component {
         switch(this.state.selectedQue){
             case queTypes[0]:
                 // console.log('hi')
-                return <SingleSelect />
+                return <SingleSelect name="Card 1" />
             case queTypes[1]:
                 return  <ShortText />
+            case queTypes[2]:
+                return <SingleSelect name="Tag 1"/>
             default:
                 return
         }
@@ -39,7 +41,7 @@ export class QuestionTemplate extends Component {
                         <Input className="questions__header-que" placeholder="Question" />
                         <Select onChange={(e)=>this.handleChange(e)} style={{ width: 180 }} placeholder='Select Que Type'>
                             <Option value="SingleSelect"><PlusCircleFilled />&nbsp;Single Select</Option>
-                            <Option value="MultiSelect"><PlusCircleFilled /> &nbsp;Multi Select</Option>
+                            <Option value="MultipleSelect"><PlusCircleFilled /> &nbsp;Multiple Select</Option>
                             <Option value="ShortText"><PlusCircleFilled /> &nbsp;Short text area</Option>
                             <Option value="Binary"><PlusCircleFilled /> &nbsp;Binary</Option>
                             <Option value="DatePicker"><PlusCircleFilled /> &nbsp;DatePicker</Option>
