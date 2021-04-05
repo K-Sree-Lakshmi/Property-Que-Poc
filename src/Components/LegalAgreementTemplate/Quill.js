@@ -1,11 +1,12 @@
 import React, { Component } from 'react'
 import ReactQuill from 'react-quill';
-import { Tooltip, message } from 'antd';
+import { Button, Tooltip, message } from 'antd';
+import './Quill.css';
 
 export class Quil extends Component {
     constructor(props) {
         super(props)
-        this.state = { text: '', saved:'' } // You can also pass a Quill Delta here
+        this.state = { text: '', saved: '', visible:false } // You can also pass a Quill Delta here
         this.handleChange = this.handleChange.bind(this)
         this.selectedChange = this.selectedChange.bind(this)
 
@@ -21,19 +22,17 @@ export class Quil extends Component {
     }
 
     selectedChange(range, source, editor) {
-        // console.log(range, 'range')
+        console.log(range, 'range')
         console.log(source, 'source')
         console.log(editor.getContents().ops[0].insert, 'editor')
-        this.setState({saved: editor.getContents().ops[0].insert})
-       if (range.index>0 && source === 'user') {
+        this.setState({ saved: editor.getContents().ops[0].insert })
+        if (range.index > 0 && source === 'user') {
             console.log('yo')
-            return (
-                message.success(this.state.saved)
-                // <Tooltip title="prompt text">
-                //     {editor.getContents().ops[0].insert}
-                // </Tooltip>
-            )
+                this.setState({visible:!this.state.visible})
         }
+        // else if(source==='silent'){
+        //     this.setState({visible:false})
+        // }
 
     }
 
@@ -55,19 +54,30 @@ export class Quil extends Component {
             'link', 'image'
         ]
         return (
-            <div>
-
-                <ReactQuill
-                    theme="snow"
-                    modules={modules}
-                    formats={formats}
-                    value={this.state.text}
-                    onChange={this.handleChange}
-                    onChangeSelection={this.selectedChange}
-                />
-                <Tooltip placement="topLeft" title="text">
-                    {this.state.saved}
-                </Tooltip>
+            <div className='quil__editor-container'>
+                <div>
+                    <ReactQuill
+                        style={{
+                            width: "600px",
+                            height: "500px"
+                        }}
+                        theme="snow"
+                        modules={modules}
+                        formats={formats}
+                        value={this.state.text}
+                        onChange={this.handleChange}
+                        onChangeSelection={this.selectedChange}
+                    />
+                </div>
+                <div className="quil-tooltip">
+                    {this.state.visible?
+                    <Tooltip placement="top" title="Add deviation">
+                        <Button type="primary" shape="circle" onClick={()=>alert('hey')}>
+                            A
+                        </Button>
+                    </Tooltip>
+                    : null}
+                </div>
             </div>
         )
     }

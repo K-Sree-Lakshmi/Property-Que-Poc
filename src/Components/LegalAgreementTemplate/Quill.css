@@ -1,0 +1,9 @@
+.quil__editor-container{
+    display: flex;
+    /* background-color: aqua; */
+}
+
+.quil-tooltip{
+    display: flex;
+    align-items: center;
+}
