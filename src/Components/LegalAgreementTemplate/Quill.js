@@ -11,9 +11,9 @@ export class Quil extends Component {
             text: '',
             saved: '',
             visible: false,
-            backendRes: '',
+            backendRes: 'world',
             selectedEditorText: '',
-            colorRange: ''
+            colorRange: 'world'
 
         } // You can also pass a Quill Delta here
         this.handleChange = this.handleChange.bind(this)
@@ -33,17 +33,16 @@ export class Quil extends Component {
     selectedChange(range, source, editor) {
         console.log(range, 'range')
         console.log(source, 'source')
-        console.log(editor.getHTML())
-        // this.setState({ selectedEditorText: editor.getHTML() })
+        console.log(editor.getHTML(), 'html')
+        this.setState({ selectedEditorText: editor.getHTML() })
+        console.log(this.state.selectedEditorText)
         console.log(editor.getContents().ops[0].insert, 'editor')
-        // this.setState({ saved: editor.getContents().ops[0].insert })
-        // // if (range.index > 0 && source === 'user') {
         if (source === 'user' && range.length > 0) {
             let id1 = range.index;
             let id2 = range.index + range.length + 1;
             let code = editor.getContents().ops[0].insert.slice(id1, id2)
             console.log(code)
-            this.setState({ colorRange: code })
+            // this.setState({ colorRange: code })
         }
 
     }
@@ -53,7 +52,7 @@ export class Quil extends Component {
     }
 
     unsetSelection = () => {
-        this.setState({ visible: false, backendRes: 'world' })
+        this.setState({ visible: false })
         // 1st method
         // const data = (
         //     <p>
@@ -63,9 +62,11 @@ export class Quil extends Component {
         // )
         // console.log(data, 'colored')
         // 2nd method
-        // if (this.state.saved.includes(this.state.backendRes)) {
-        //     console.log(`<p><span style="background-color: rgb(255, 194, 102);">${this.state.backendRes}</span></p>`)
-        // }
+        if (this.state.selectedEditorText.includes(this.state.backendRes)) {
+            const replaced = `<span style="background-color: rgb(255, 194, 102);">${this.state.backendRes}</span>`;
+            const val = this.state.colorRange;
+            console.log(this.state.selectedEditorText.replace(val, replaced))
+        }
     }
 
     render() {
@@ -84,12 +85,12 @@ export class Quil extends Component {
             // toolbar: [{ 'color': [] }, { 'background': [] }],  
         }
 
-        const formats = [
-            'header',
-            'bold', 'italic', 'underline', 'strike', 'blockquote',
-            'list', 'bullet', 'indent',
-            'link', 'image'
-        ]
+        // const formats = [
+        //     'header',
+        //     'bold', 'italic', 'underline', 'strike', 'blockquote',
+        //     'list', 'bullet', 'indent',
+        //     'link', 'image'
+        // ]
         return (
             <div className='quil__editor-container'>
                 <div>
