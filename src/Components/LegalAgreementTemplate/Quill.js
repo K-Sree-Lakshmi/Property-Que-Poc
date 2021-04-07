@@ -3,10 +3,19 @@ import ReactQuill from 'react-quill';
 import { Button, Tooltip, message } from 'antd';
 import './Quill.css';
 
+
 export class Quil extends Component {
     constructor(props) {
         super(props)
-        this.state = { text: '', saved: '', visible: false, selRange: 0, selectedEditorText: '', colorRange: '' } // You can also pass a Quill Delta here
+        this.state = {
+            text: '',
+            saved: '',
+            visible: false,
+            backendRes: '',
+            selectedEditorText: '',
+            colorRange: ''
+
+        } // You can also pass a Quill Delta here
         this.handleChange = this.handleChange.bind(this)
         this.selectedChange = this.selectedChange.bind(this)
 
@@ -27,18 +36,14 @@ export class Quil extends Component {
         console.log(editor.getHTML())
         // this.setState({ selectedEditorText: editor.getHTML() })
         console.log(editor.getContents().ops[0].insert, 'editor')
-        this.setState({ saved: editor.getContents().ops[0].insert })
-        // if (range.index > 0 && source === 'user') {
+        // this.setState({ saved: editor.getContents().ops[0].insert })
+        // // if (range.index > 0 && source === 'user') {
         if (source === 'user' && range.length > 0) {
-            // console.log('yo')
-            // console.log(editor)
-            let code = editor.getContents().ops[0].insert.slice(range.index,range.length)
-            console.log(range.length)
+            let id1 = range.index;
+            let id2 = range.index + range.length + 1;
+            let code = editor.getContents().ops[0].insert.slice(id1, id2)
             console.log(code)
             this.setState({ colorRange: code })
-
-            this.setState({ selRange: range.length })
-            // this.setState({ visible: !this.state.visible })
         }
 
     }
@@ -48,14 +53,19 @@ export class Quil extends Component {
     }
 
     unsetSelection = () => {
-        this.setState({ visible: false })
-        const data = (
-            <p>
-                {this.state.saved}
-                <span style="background-color:#f39c12">{this.state.colorRange}</span>
-            </p>
-        )
-        console.log(data, 'colored')
+        this.setState({ visible: false, backendRes: 'world' })
+        // 1st method
+        // const data = (
+        //     <p>
+        //         {this.state.saved}
+        //         <span style="background-color:#f39c12">{this.state.colorRange}</span>
+        //     </p>
+        // )
+        // console.log(data, 'colored')
+        // 2nd method
+        // if (this.state.saved.includes(this.state.backendRes)) {
+        //     console.log(`<p><span style="background-color: rgb(255, 194, 102);">${this.state.backendRes}</span></p>`)
+        // }
     }
 
     render() {
@@ -71,6 +81,7 @@ export class Quil extends Component {
 
         const modules = {
             toolbar: '#toolbar'
+            // toolbar: [{ 'color': [] }, { 'background': [] }],  
         }
 
         const formats = [
