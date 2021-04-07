@@ -65,7 +65,8 @@ export class Quil extends Component {
         if (this.state.selectedEditorText.includes(this.state.backendRes)) {
             const replaced = `<span style="background-color: rgb(255, 194, 102);">${this.state.backendRes}</span>`;
             const val = this.state.colorRange;
-            console.log(this.state.selectedEditorText.replace(val, replaced))
+            const colorText= this.state.selectedEditorText.replace(val, replaced);
+            this.setState({text:colorText})
         }
     }
 
