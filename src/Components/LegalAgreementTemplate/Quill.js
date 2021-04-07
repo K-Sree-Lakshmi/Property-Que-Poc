@@ -6,7 +6,7 @@ import './Quill.css';
 export class Quil extends Component {
     constructor(props) {
         super(props)
-        this.state = { text: '', saved: '', visible: false } // You can also pass a Quill Delta here
+        this.state = { text: '', saved: '', visible: false, selRange: 0, selectedEditorText: '', colorRange: '' } // You can also pass a Quill Delta here
         this.handleChange = this.handleChange.bind(this)
         this.selectedChange = this.selectedChange.bind(this)
 
@@ -16,7 +16,7 @@ export class Quil extends Component {
         // console.log(content, 'content')
         // console.log(delta,'delta')
         // console.log(source,'source')
-        // console.log(editor,'editor')
+        // console.log(editor.getHTML(),'editor')
         // console.log(value, 'hi')
         this.setState({ text: content })
     }
@@ -24,26 +24,53 @@ export class Quil extends Component {
     selectedChange(range, source, editor) {
         console.log(range, 'range')
         console.log(source, 'source')
+        console.log(editor.getHTML())
+        // this.setState({ selectedEditorText: editor.getHTML() })
         console.log(editor.getContents().ops[0].insert, 'editor')
         this.setState({ saved: editor.getContents().ops[0].insert })
         // if (range.index > 0 && source === 'user') {
-        if (source === 'user') {
+        if (source === 'user' && range.length > 0) {
+            // console.log('yo')
+            // console.log(editor)
+            let code = editor.getContents().ops[0].insert.slice(range.index,range.length)
+            console.log(range.length)
+            console.log(code)
+            this.setState({ colorRange: code })
 
-            console.log('yo')
-            this.setState({ visible: !this.state.visible })
+            this.setState({ selRange: range.length })
+            // this.setState({ visible: !this.state.visible })
         }
 
     }
 
+    callButton = () => {
+        this.setState({ visible: true })
+    }
+
+    unsetSelection = () => {
+        this.setState({ visible: false })
+        const data = (
+            <p>
+                {this.state.saved}
+                <span style="background-color:#f39c12">{this.state.colorRange}</span>
+            </p>
+        )
+        console.log(data, 'colored')
+    }
+
     render() {
+        // const modules = {
+        //     toolbar: [
+        //         [{ 'header': [1, 2, false] }],
+        //         ['bold', 'italic', 'underline', 'strike', 'blockquote'],
+        //         [{ 'list': 'ordered' }, { 'list': 'bullet' }, { 'indent': '-1' }, { 'indent': '+1' }],
+        //         ['link', 'image'],
+        //         ['clean']
+        //     ],
+        // }
+
         const modules = {
-            toolbar: [
-                [{ 'header': [1, 2, false] }],
-                ['bold', 'italic', 'underline', 'strike', 'blockquote'],
-                [{ 'list': 'ordered' }, { 'list': 'bullet' }, { 'indent': '-1' }, { 'indent': '+1' }],
-                ['link', 'image'],
-                ['clean']
-            ],
+            toolbar: '#toolbar'
         }
 
         const formats = [
@@ -77,17 +104,24 @@ export class Quil extends Component {
                         modules={modules}
                         value={this.state.text}
                         onChange={this.handleChange}
-                    onChangeSelection={this.selectedChange}
+                        onChangeSelection={this.selectedChange}
                     />
                 </div>
                 <div className="quil-tooltip">
                     {this.state.visible ?
                         <Tooltip placement="top" title="Add deviation">
-                            <Button type="primary" shape="circle" onClick={() => alert('hey')}>
+                            <Button type="primary" shape="circle" onClick={this.unsetSelection}>
                                 A
                         </Button>
                         </Tooltip>
                         : null}
+                </div>
+                <div id="toolbar">
+                    <Tooltip placement="top" title="Add deviation">
+                        <Button type="primary" shape="circle" onClick={this.callButton}>
+                            +
+                        </Button>
+                    </Tooltip>
                 </div>
             </div>
         )
